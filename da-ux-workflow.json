@@ -1,0 +1,398 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "DA Authoring UX Workflow",
+    "subtitle": "Core UI blocks in da-live & da-nx across a typical authoring session",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "author-a-page",
+        "label": "Author a page",
+        "focus": [
+          "browse",
+          "authoring",
+          "preview"
+        ],
+        "note": "Browse opens the Authoring canvas."
+      },
+      {
+        "id": "ai-loop",
+        "label": "AI-assisted editing loop",
+        "focus": [
+          "preview",
+          "aiassist",
+          "authoring"
+        ],
+        "note": "Preview the draft, refine it with the AI Assistant, and iterate."
+      },
+      {
+        "id": "governance-publish",
+        "label": "Governance & publish",
+        "focus": [
+          "preview",
+          "aiassist",
+          "preflight",
+          "entctx",
+          "publish"
+        ],
+        "note": "Preview or the AI Assistant can trigger Preflight, which checks Enterprise Context policies before Publish."
+      },
+      {
+        "id": "framework",
+        "label": "Framework & helpers",
+        "focus": [
+          "login",
+          "shell",
+          "config",
+          "extnx",
+          "sheet"
+        ],
+        "note": "Persistent da-nx chrome, config, and the Sheet editor sit alongside it as helper-level surfaces."
+      },
+      {
+        "id": "canvas-panels",
+        "label": "Authoring tool panels",
+        "focus": [
+          "authoring",
+          "outline",
+          "files",
+          "comments",
+          "versions",
+          "blocklib",
+          "extcanvas"
+        ],
+        "note": "Side panels available inside the Authoring canvas."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "main",
+      "label": "Authoring Flow (da-live)"
+    },
+    {
+      "id": "panels",
+      "label": "Authoring tool panels (Canvas)"
+    },
+    {
+      "id": "assist",
+      "label": "AI Assist"
+    },
+    {
+      "id": "gov",
+      "label": "Governance"
+    },
+    {
+      "id": "helpers",
+      "label": "Framework / Helpers (da-nx)"
+    }
+  ],
+  "phases": [
+    {
+      "id": "access",
+      "label": "Access",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "author-phase",
+      "label": "Author",
+      "fromCol": 2,
+      "toCol": 2
+    },
+    {
+      "id": "assist-phase",
+      "label": "Assist + verify",
+      "fromCol": 4,
+      "toCol": 4,
+      "variant": "emphasis"
+    },
+    {
+      "id": "ship-phase",
+      "label": "Ship",
+      "fromCol": 5,
+      "toCol": 5,
+      "variant": "dashed"
+    }
+  ],
+  "mainPath": [
+    "browse",
+    "authoring",
+    "preview",
+    "aiassist",
+    "preflight",
+    "publish"
+  ],
+  "groups": [
+    {
+      "id": "panels-group",
+      "label": "Canvas tool panel views",
+      "lane": "panels",
+      "fromCol": 0,
+      "toCol": 5
+    }
+  ],
+  "nodes": [
+    {
+      "id": "login",
+      "lane": "helpers",
+      "col": 0,
+      "type": "frontend",
+      "label": "Login",
+      "sublabel": "Adobe IMS auth",
+      "tag": "da-nx: ims.js"
+    },
+    {
+      "id": "shell",
+      "lane": "helpers",
+      "col": 1,
+      "type": "frontend",
+      "label": "App Shell",
+      "sublabel": "nav, sidenav",
+      "tag": "da-nx: nx.js"
+    },
+    {
+      "id": "extnx",
+      "lane": "helpers",
+      "col": 5,
+      "type": "frontend",
+      "label": "Extensions",
+      "sublabel": "plugin apps",
+      "tag": "da-nx: public/plugins"
+    },
+    {
+      "id": "browse",
+      "lane": "main",
+      "col": 1,
+      "type": "frontend",
+      "label": "Browse Sites",
+      "sublabel": "list, search",
+      "tag": "da-live: browse"
+    },
+    {
+      "id": "authoring",
+      "lane": "main",
+      "col": 2,
+      "type": "frontend",
+      "label": "Authoring",
+      "sublabel": "WYSIWYG editor",
+      "tag": "da-live: canvas",
+      "width": 80
+    },
+    {
+      "id": "preview",
+      "lane": "main",
+      "col": 4,
+      "type": "backend",
+      "label": "Preview",
+      "sublabel": "Helix/AEM preview API",
+      "tag": "da-nx: aem.preview"
+    },
+    {
+      "id": "publish",
+      "lane": "main",
+      "col": 5,
+      "type": "cloud",
+      "label": "Publish",
+      "sublabel": "to Edge Delivery",
+      "tag": "da-nx: aem.publish"
+    },
+    {
+      "id": "aiassist",
+      "lane": "assist",
+      "col": 4,
+      "type": "frontend",
+      "label": "AI Assistant",
+      "sublabel": "in-canvas chat",
+      "tag": "da-nx: chat, chat-ao"
+    },
+    {
+      "id": "preflight",
+      "lane": "gov",
+      "col": 5,
+      "type": "security",
+      "label": "Preflight",
+      "sublabel": "content governance gate",
+      "tag": "da-live: da-prepare"
+    },
+    {
+      "id": "sheet",
+      "lane": "helpers",
+      "col": 2,
+      "type": "frontend",
+      "label": "Edit Sheet",
+      "sublabel": "tabular data",
+      "tag": "da-live: sheet"
+    },
+    {
+      "id": "outline",
+      "lane": "panels",
+      "col": 0,
+      "type": "frontend",
+      "label": "Outline",
+      "width": 64,
+      "height": 40
+    },
+    {
+      "id": "files",
+      "lane": "panels",
+      "col": 1,
+      "type": "frontend",
+      "label": "Files",
+      "width": 64,
+      "height": 40
+    },
+    {
+      "id": "comments",
+      "lane": "panels",
+      "col": 2,
+      "type": "frontend",
+      "label": "Comments",
+      "width": 64,
+      "height": 40
+    },
+    {
+      "id": "versions",
+      "lane": "panels",
+      "col": 3,
+      "type": "frontend",
+      "label": "Versions",
+      "width": 64,
+      "height": 40
+    },
+    {
+      "id": "blocklib",
+      "lane": "panels",
+      "col": 4,
+      "type": "frontend",
+      "label": "Blocks",
+      "width": 64,
+      "height": 40
+    },
+    {
+      "id": "extcanvas",
+      "lane": "panels",
+      "col": 5,
+      "type": "frontend",
+      "label": "Extensions",
+      "width": 64,
+      "height": 40
+    },
+    {
+      "id": "sheetship",
+      "lane": "helpers",
+      "col": 4,
+      "type": "backend",
+      "label": "Preview/Publish",
+      "sublabel": "shared aem API",
+      "tag": "da-title (shared)",
+      "width": 110
+    },
+    {
+      "id": "config",
+      "lane": "helpers",
+      "col": 3,
+      "type": "frontend",
+      "label": "Config",
+      "sublabel": "site/org settings",
+      "tag": "da-nx: ewFlags.js"
+    },
+    {
+      "id": "entctx",
+      "lane": "gov",
+      "col": 4,
+      "type": "backend",
+      "label": "Enterprise Context",
+      "sublabel": "org/site policies",
+      "tag": "used by Preflight",
+      "width": 130
+    }
+  ],
+  "edges": [
+    {
+      "from": "login",
+      "to": "shell",
+      "label": "persistent shell",
+      "role": "branch",
+      "variant": "dashed"
+    },
+    {
+      "from": "login",
+      "to": "browse"
+    },
+    {
+      "from": "browse",
+      "to": "authoring"
+    },
+    {
+      "from": "browse",
+      "to": "sheet",
+      "label": "also from Browse",
+      "role": "branch"
+    },
+    {
+      "from": "authoring",
+      "to": "preview"
+    },
+    {
+      "from": "preview",
+      "to": "aiassist"
+    },
+    {
+      "from": "aiassist",
+      "to": "authoring",
+      "label": "iterate edits",
+      "variant": "dashed",
+      "role": "return"
+    },
+    {
+      "from": "aiassist",
+      "to": "preflight"
+    },
+    {
+      "from": "preflight",
+      "to": "publish"
+    },
+    {
+      "from": "sheet",
+      "to": "sheetship",
+      "label": "no AI, no governance",
+      "role": "branch",
+      "variant": "dashed"
+    },
+    {
+      "from": "preview",
+      "to": "preflight",
+      "label": "can trigger preflight",
+      "role": "branch",
+      "variant": "dashed"
+    },
+    {
+      "from": "entctx",
+      "to": "preflight",
+      "label": "policies",
+      "role": "branch"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Authoring",
+      "items": [
+        "Browse opens either the Authoring canvas or a Sheet \u2014 both da-live blocks",
+        "Sheet reuses da-title (same Preview/Publish toolbar as legacy edit)",
+        "Login, App Shell, AI Assistant and Extensions are persistent da-nx framework chrome"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "AI + Governance",
+      "items": [
+        "chat.js picks nx-chat or nx-chat-ao \u2014 chat-ao talks to CMA/CX Coworker over MCP as its backend",
+        "Preflight only gates the Authoring path; Sheet publishes directly, no AI, no governance",
+        "Preview and Publish share one utility: aemAction()/saveToAem() \u2192 nx2 api.js"
+      ]
+    }
+  ]
+}

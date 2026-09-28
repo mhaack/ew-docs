@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Document Authoring (DA) Platform Architecture",
+    "subtitle": "Experience Workspace core services and their runtime relationships",
+    "output": "da-architecture.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "authoring-path",
+        "label": "Authoring request path",
+        "focus": [
+          "author",
+          "da-live",
+          "da-nx",
+          "da-admin"
+        ],
+        "note": "The author's browser loads da-live, built on the da-nx shell, and reads/writes content through da-admin."
+      },
+      {
+        "id": "realtime-collab",
+        "label": "Real-time collaboration",
+        "focus": [
+          "da-live",
+          "da-collab",
+          "da-admin"
+        ],
+        "note": "Concurrent editors sync over da-collab's Durable Objects, which persist back through da-admin."
+      },
+      {
+        "id": "coworker-agent",
+        "label": "CMA / CX Coworker agent",
+        "focus": [
+          "da-live",
+          "coworker",
+          "da-mcp",
+          "da-admin"
+        ],
+        "note": "The chat-ao block in da-live/da-nx talks to Adobe's Agent Orchestrator (Coworker), which calls DA back through da-mcp's tool set."
+      },
+      {
+        "id": "publishing",
+        "label": "Publishing to Edge Delivery",
+        "focus": [
+          "da-admin",
+          "storage",
+          "da-content",
+          "edge-delivery"
+        ],
+        "note": "Published content is served to production sites through da-content, which falls back to da-admin."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "author",
+      "type": "external",
+      "label": "Author",
+      "sublabel": "Browser",
+      "pos": [
+        20,
+        340
+      ],
+      "size": [
+        130,
+        64
+      ]
+    },
+    {
+      "id": "da-live",
+      "type": "frontend",
+      "label": "da-live",
+      "sublabel": "Authoring web app",
+      "pos": [
+        230,
+        340
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "tag": "canvas, browse, sheet"
+    },
+    {
+      "id": "da-nx",
+      "type": "frontend",
+      "label": "da-nx",
+      "sublabel": "Nexter shared shell",
+      "pos": [
+        230,
+        120
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "tag": "chat-ao, editortoggle, nav"
+    },
+    {
+      "id": "da-admin",
+      "type": "backend",
+      "label": "da-admin",
+      "sublabel": "Content API (Worker)",
+      "pos": [
+        560,
+        340
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "da-collab",
+      "type": "backend",
+      "label": "da-collab",
+      "sublabel": "Realtime collab (Y.js)",
+      "pos": [
+        560,
+        120
+      ],
+      "size": [
+        170,
+        64
+      ]
+    },
+    {
+      "id": "da-content",
+      "type": "backend",
+      "label": "da-content",
+      "sublabel": "Published content origin",
+      "pos": [
+        860,
+        340
+      ],
+      "size": [
+        170,
+        64
+      ]
+    },
+    {
+      "id": "edge-delivery",
+      "type": "external",
+      "label": "Edge Delivery",
+      "sublabel": "aem.live / aem.page",
+      "pos": [
+        1180,
+        340
+      ],
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "coworker",
+      "type": "external",
+      "label": "CMA / CX Coworker",
+      "sublabel": "Agent Orchestrator",
+      "pos": [
+        225,
+        600
+      ],
+      "size": [
+        180,
+        64
+      ]
+    },
+    {
+      "id": "da-mcp",
+      "type": "backend",
+      "label": "AEM MCP",
+      "sublabel": "MCP server: 17 DA tools",
+      "pos": [
+        555,
+        600
+      ],
+      "size": [
+        170,
+        64
+      ]
+    },
+    {
+      "id": "mcp-clients",
+      "type": "external",
+      "label": "Other MCP Clients",
+      "sublabel": "Claude, Cursor, ChatGPT",
+      "pos": [
+        230,
+        760
+      ],
+      "size": [
+        180,
+        64
+      ]
+    },
+    {
+      "id": "storage",
+      "type": "database",
+      "label": "R2 + KV Storage",
+      "sublabel": "content, auth, config, jobs",
+      "pos": [
+        865,
+        600
+      ],
+      "size": [
+        160,
+        64
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "author-to-live",
+      "from": "author",
+      "to": "da-live",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "nx-to-live",
+      "from": "da-nx",
+      "to": "da-live",
+      "label": "provides shell & blocks",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        308,
+        198
+      ]
+    },
+    {
+      "id": "live-to-admin",
+      "from": "da-live",
+      "to": "da-admin",
+      "label": "CRUD content API",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "live-to-collab",
+      "from": "da-live",
+      "to": "da-collab",
+      "label": "WebSocket doc sync",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "admin-to-collab",
+      "from": "da-admin",
+      "to": "da-collab",
+      "label": "mutual service bindings",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "admin-to-storage",
+      "from": "da-admin",
+      "to": "storage",
+      "label": "read/write objects",
+      "fromSide": "right",
+      "toSide": "top"
+    },
+    {
+      "id": "content-to-admin",
+      "from": "da-content",
+      "to": "da-admin",
+      "label": "service binding: fallback fetch",
+      "fromSide": "left",
+      "toSide": "right",
+      "labelAt": [
+        790,
+        321
+      ]
+    },
+    {
+      "id": "content-to-storage",
+      "from": "da-content",
+      "to": "storage",
+      "label": "read embeddable assets",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        947,
+        418
+      ]
+    },
+    {
+      "id": "content-to-edge",
+      "from": "da-content",
+      "to": "edge-delivery",
+      "label": "origin for published sites",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "live-to-coworker",
+      "from": "da-live",
+      "to": "coworker",
+      "label": "chat-ao: WebSocket",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        315,
+        418
+      ]
+    },
+    {
+      "id": "coworker-to-mcp",
+      "from": "coworker",
+      "to": "da-mcp",
+      "label": "MCP tool calls",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "mcpclients-to-mcp",
+      "from": "mcp-clients",
+      "to": "da-mcp",
+      "label": "Streamable HTTP + DA token",
+      "fromSide": "top",
+      "toSide": "left"
+    },
+    {
+      "id": "mcp-to-admin",
+      "from": "da-mcp",
+      "to": "da-admin",
+      "label": "service binding: DA tools",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "mcp-to-edge",
+      "from": "da-mcp",
+      "to": "edge-delivery",
+      "label": "preview/publish (admin.hlx.page / api.aem.live)",
+      "fromSide": "bottom",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Authoring",
+      "items": [
+        "da-live is the browser-based authoring UI (browse, canvas editor, sheet, media)",
+        "da-nx (\"Nexter\") supplies the shared shell and blocks: chat-ao (AI chat), editortoggle (edit \u2192 canvas rollout), nav/sidenav",
+        "da-admin is the single source of truth for content CRUD, auth and config"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Collaboration",
+      "items": [
+        "da-collab runs a Durable Object per document for real-time Y.js sync",
+        "da-admin and da-collab hold mutual service bindings to coordinate reads and persisted writes"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "AI coworker (Adobe CX)",
+      "items": [
+        "The chat-ao block connects over WebSocket to Adobe's Agent Orchestrator (\"Coworker\"), an external Experience Cloud agent \u2014 not hosted in this workspace",
+        "Coworker (and any other MCP client such as Claude or Cursor) calls DA back through da-mcp's 17 tools for repo/content/preview/publish operations",
+        "da-agent and da-sc are legacy/side projects being phased out in favor of this Coworker + da-mcp path"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Publishing",
+      "items": [
+        "da-content is the public edge origin for published sites, reading storage directly and falling back to da-admin",
+        "da-mcp's preview/publish tools call the Helix/HLX6 admin APIs that front Edge Delivery",
+        "Published output is consumed by Edge Delivery Services (aem.live / aem.page)"
+      ]
+    }
+  ]
+}

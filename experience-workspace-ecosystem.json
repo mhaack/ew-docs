@@ -1,0 +1,423 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Experience Workspace Ecosystem Architecture",
+    "subtitle": "External entry points, governance, orchestration, and integration surfaces",
+    "output": "experience-workspace-ecosystem.html",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "frontend": {
+          "label": "Experience Workspace"
+        },
+        "security": {
+          "label": "Governance"
+        },
+        "external": {
+          "label": "Integrations"
+        }
+      }
+    },
+    "views": [
+      {
+        "id": "entry-points",
+        "label": "Entry points",
+        "focus": [
+          "author",
+          "ema",
+          "abv",
+          "workfront",
+          "experience-workspace"
+        ],
+        "note": "Marketeers, content creators, ABV, Workfront, and EMA feed work into Experience Workspace."
+      },
+      {
+        "id": "governance",
+        "label": "Governance",
+        "focus": [
+          "brand-governance",
+          "aso",
+          "experience-workspace"
+        ],
+        "note": "Governance policies shape authoring, compliance, and optimization decisions."
+      },
+      {
+        "id": "mcp-ecosystem",
+        "label": "MCP ecosystem",
+        "focus": [
+          "experience-workspace",
+          "coworker",
+          "aem-mcp"
+        ],
+        "note": "Coworker accesses Experience Workspace through the MCP tool layer."
+      },
+      {
+        "id": "delivery-and-assets",
+        "label": "Assets and delivery",
+        "focus": [
+          "experience-workspace",
+          "aem-assets",
+          "edge-delivery"
+        ],
+        "note": "Experience Workspace coordinates with assets and delivery systems for publishing outcomes."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "author",
+      "type": "external",
+      "label": "Marketeer / Content Creator",
+      "sublabel": "Human entry point",
+      "pos": [
+        20,
+        150
+      ],
+      "size": [
+        300,
+        82
+      ]
+    },
+    {
+      "id": "ema",
+      "type": "external",
+      "label": "Experience Modernization Agent",
+      "sublabel": "EMA",
+      "pos": [
+        20,
+        270
+      ],
+      "size": [
+        300,
+        82
+      ]
+    },
+    {
+      "id": "abv",
+      "type": "external",
+      "label": "Adobe Brand Visibility",
+      "sublabel": "abv",
+      "pos": [
+        20,
+        390
+      ],
+      "size": [
+        300,
+        82
+      ]
+    },
+    {
+      "id": "workfront",
+      "type": "external",
+      "label": "Workfront",
+      "sublabel": "Content Briefs, Approvals workflows",
+      "pos": [
+        20,
+        510
+      ],
+      "size": [
+        300,
+        82
+      ]
+    },
+    {
+      "id": "experience-workspace",
+      "type": "frontend",
+      "label": "Experience Workspace",
+      "sublabel": "AEM Agentic authoring platform",
+      "pos": [
+        595,
+        320
+      ],
+      "size": [
+        320,
+        120
+      ]
+    },
+    {
+      "id": "coworker",
+      "type": "external",
+      "label": "CMA / CX Coworker",
+      "sublabel": "Agent Orchestrator",
+      "pos": [
+        395,
+        110
+      ],
+      "size": [
+        220,
+        82
+      ]
+    },
+    {
+      "id": "aem-mcp",
+      "type": "backend",
+      "label": "AEM MCP",
+      "sublabel": "Tooling + integrations",
+      "pos": [
+        650,
+        110
+      ],
+      "size": [
+        210,
+        82
+      ]
+    },
+    {
+      "id": "aem-assets",
+      "type": "external",
+      "label": "AEM Assets",
+      "sublabel": "Asset source + retrieval",
+      "pos": [
+        905,
+        110
+      ],
+      "size": [
+        210,
+        82
+      ]
+    },
+    {
+      "id": "edge-delivery",
+      "type": "external",
+      "label": "Edge Delivery",
+      "sublabel": "Content Delivery",
+      "pos": [
+        1140,
+        339
+      ],
+      "size": [
+        180,
+        82
+      ]
+    },
+    {
+      "id": "brand-governance",
+      "type": "security",
+      "label": "Brand Governance",
+      "sublabel": "Brand rules, policies and compliance",
+      "pos": [
+        505,
+        590
+      ],
+      "size": [
+        240,
+        82
+      ]
+    },
+    {
+      "id": "aso",
+      "type": "security",
+      "label": "ASO",
+      "sublabel": "Sites Optimization",
+      "pos": [
+        805,
+        590
+      ],
+      "size": [
+        200,
+        82
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Content Governance",
+      "wraps": [
+        "brand-governance",
+        "aso"
+      ],
+      "pad": 18
+    },
+    {
+      "kind": "security-group",
+      "label": "Input / Authoring Sources",
+      "wraps": [
+        "author",
+        "ema",
+        "abv",
+        "workfront"
+      ],
+      "pad": 18
+    }
+  ],
+  "connections": [
+    {
+      "id": "author-to-ew",
+      "from": "author",
+      "to": "experience-workspace",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [
+          380,
+          191
+        ],
+        [
+          380,
+          380
+        ]
+      ]
+    },
+    {
+      "id": "ema-to-ew",
+      "from": "ema",
+      "to": "experience-workspace",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [
+          380,
+          311
+        ],
+        [
+          380,
+          380
+        ]
+      ]
+    },
+    {
+      "id": "abv-to-ew",
+      "from": "abv",
+      "to": "experience-workspace",
+      "label": "entry / launch",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [
+          380,
+          431
+        ],
+        [
+          380,
+          380
+        ]
+      ],
+      "labelAt": [
+        320,
+        486
+      ]
+    },
+    {
+      "id": "workfront-to-ew",
+      "from": "workfront",
+      "to": "experience-workspace",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [
+          380,
+          551
+        ],
+        [
+          380,
+          380
+        ]
+      ]
+    },
+    {
+      "id": "coworker-to-ew",
+      "from": "coworker",
+      "to": "experience-workspace",
+      "label": "chat / tasking",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        505,
+        206
+      ]
+    },
+    {
+      "id": "mcp-to-ew",
+      "from": "aem-mcp",
+      "to": "experience-workspace",
+      "label": "workspace tools",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "route": "straight",
+      "labelAt": [
+        755,
+        206
+      ]
+    },
+    {
+      "id": "ew-to-assets",
+      "from": "experience-workspace",
+      "to": "aem-assets",
+      "label": "asset browse / ingest",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelAt": [
+        1010,
+        206
+      ]
+    },
+    {
+      "id": "ew-to-edge",
+      "from": "experience-workspace",
+      "to": "edge-delivery",
+      "label": "preview / publish",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left",
+      "route": "straight",
+      "labelAt": [
+        910,
+        454
+      ]
+    },
+    {
+      "id": "coworker-to-mcp",
+      "from": "coworker",
+      "to": "aem-mcp",
+      "label": "MCP tools",
+      "fromSide": "right",
+      "toSide": "left",
+      "route": "straight",
+      "labelAt": [
+        633,
+        206
+      ]
+    },
+    {
+      "id": "mcp-to-assets",
+      "from": "aem-mcp",
+      "to": "aem-assets",
+      "label": "asset access",
+      "fromSide": "right",
+      "toSide": "left",
+      "route": "straight",
+      "labelAt": [
+        883,
+        206
+      ]
+    },
+    {
+      "id": "brandgov-to-ew",
+      "from": "brand-governance",
+      "to": "experience-workspace",
+      "label": "brand policy",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelAt": [
+        625,
+        560
+      ]
+    },
+    {
+      "id": "aso-to-ew",
+      "from": "aso",
+      "to": "experience-workspace",
+      "label": "optimization policy",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelAt": [
+        905,
+        560
+      ]
+    }
+  ]
+}

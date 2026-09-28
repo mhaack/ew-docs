@@ -4,7 +4,7 @@
   "meta": {
     "title": "Experience Workspace Platform Architecture",
     "subtitle": "DA core services and runtime relationships",
-    "output": "da-architecture2.html",
+    "output": "ew-architecture2.html",
     "quality_profile": "showcase",
     "views": [
       {

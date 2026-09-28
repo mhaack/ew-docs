@@ -4,7 +4,7 @@
   "meta": {
     "title": "Document Authoring (DA) Platform Architecture",
     "subtitle": "Experience Workspace core services and their runtime relationships",
-    "output": "da-architecture.html",
+    "output": "ew-architecture.html",
     "quality_profile": "showcase",
     "views": [
       {

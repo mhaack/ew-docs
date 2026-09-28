@@ -14,10 +14,11 @@ This repository contains architecture and workflow diagrams for the Experience W
 ### GitHub Pages
 Recommended for stable links. Pages is already enabled for this repo:
 
-- `https://mhaack.github.io/ew-docs/da-architecture.html`
-- `https://mhaack.github.io/ew-docs/da-architecture2.html`
-- `https://mhaack.github.io/ew-docs/experience-workspace-ecosystem.html`
-- `https://mhaack.github.io/ew-docs/da-ux-workflow.html`
+- [Main index](https://mhaack.github.io/ew-docs/)
+- [da-architecture.html](https://mhaack.github.io/ew-docs/da-architecture.html)
+- [da-architecture2.html](https://mhaack.github.io/ew-docs/da-architecture2.html)
+- [experience-workspace-ecosystem.html](https://mhaack.github.io/ew-docs/experience-workspace-ecosystem.html)
+- [da-ux-workflow.html](https://mhaack.github.io/ew-docs/da-ux-workflow.html)
 
 ### Quick preview
 You can also render the HTML directly with RawGitHack-style preview URLs:

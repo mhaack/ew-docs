@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Experience Workspace Platform Architecture (Helix 5)",
+    "subtitle": "DA core services and runtime relationships",
+    "output": "ew-architecture-helix5.html",
+    "quality_profile": "showcase",
+    "legend": {
+      "entries": {
+        "database": {
+          "label": "Storage"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "author",
+      "type": "external",
+      "label": "Author",
+      "sublabel": "Browser",
+      "pos": [
+        20,
+        250
+      ],
+      "size": [
+        150,
+        82
+      ]
+    },
+    {
+      "id": "da-live",
+      "type": "frontend",
+      "label": "Experience Workspace",
+      "sublabel": "Authoring UI · da-live",
+      "pos": [
+        200,
+        250
+      ],
+      "size": [
+        210,
+        82
+      ],
+      "tag": "canvas, browse, sheet"
+    },
+    {
+      "id": "da-nx",
+      "type": "frontend",
+      "label": "Shell & Tools",
+      "sublabel": "Shared shell · da-nx",
+      "pos": [
+        200,
+        80
+      ],
+      "size": [
+        210,
+        82
+      ],
+      "tag": "chat-ao, editortoggle, nav"
+    },
+    {
+      "id": "da-admin",
+      "type": "backend",
+      "label": "Backend Services",
+      "sublabel": "Worker API · da-admin",
+      "pos": [
+        490,
+        250
+      ],
+      "size": [
+        190,
+        82
+      ]
+    },
+    {
+      "id": "da-collab",
+      "type": "backend",
+      "label": "Collaboration Services",
+      "sublabel": "Y.js sync · da-collab",
+      "pos": [
+        490,
+        80
+      ],
+      "size": [
+        210,
+        82
+      ]
+    },
+    {
+      "id": "da-content",
+      "type": "backend",
+      "label": "Content Source for EDS",
+      "sublabel": "Published origin · da-content",
+      "pos": [
+        760,
+        250
+      ],
+      "size": [
+        210,
+        82
+      ]
+    },
+    {
+      "id": "edge-delivery",
+      "type": "external",
+      "label": "Edge Delivery",
+      "sublabel": "aem.live / aem.page",
+      "pos": [
+        1040,
+        250
+      ],
+      "size": [
+        180,
+        82
+      ]
+    },
+    {
+      "id": "coworker",
+      "type": "external",
+      "label": "CMA / CX Coworker",
+      "sublabel": "Agent Orchestrator",
+      "pos": [
+        200,
+        430
+      ],
+      "size": [
+        210,
+        82
+      ]
+    },
+    {
+      "id": "da-mcp",
+      "type": "backend",
+      "label": "AEM MCP",
+      "sublabel": "MCP server · 17 DA tools",
+      "pos": [
+        490,
+        430
+      ],
+      "size": [
+        190,
+        82
+      ]
+    },
+    {
+      "id": "mcp-clients",
+      "type": "external",
+      "label": "Other MCP Clients",
+      "sublabel": "Claude, Cursor, ChatGPT",
+      "pos": [
+        200,
+        580
+      ],
+      "size": [
+        210,
+        82
+      ]
+    },
+    {
+      "id": "storage",
+      "type": "database",
+      "label": "S3/R2 + KV Storage",
+      "sublabel": "content, auth, config, jobs",
+      "pos": [
+        760,
+        430
+      ],
+      "size": [
+        190,
+        82
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "author-to-live",
+      "from": "author",
+      "to": "da-live",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "nx-to-live",
+      "from": "da-nx",
+      "to": "da-live",
+      "label": "shell + blocks",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        298,
+        186
+      ]
+    },
+    {
+      "id": "live-to-admin",
+      "from": "da-live",
+      "to": "da-admin",
+      "label": "content CRUD",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "live-to-collab",
+      "from": "da-live",
+      "to": "da-collab",
+      "label": "doc sync (WS)",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "admin-to-collab",
+      "from": "da-admin",
+      "to": "da-collab",
+      "label": "service bindings",
+      "fromSide": "top",
+      "toSide": "bottom",
+      "labelAt": [
+        665,
+        216
+      ]
+    },
+    {
+      "id": "admin-to-storage",
+      "from": "da-admin",
+      "to": "storage",
+      "label": "object read/write",
+      "fromSide": "bottom",
+      "toSide": "left"
+    },
+    {
+      "id": "content-to-admin",
+      "from": "da-content",
+      "to": "da-admin",
+      "label": "fallback fetch",
+      "fromSide": "left",
+      "toSide": "right"
+    },
+    {
+      "id": "content-to-storage",
+      "from": "da-content",
+      "to": "storage",
+      "label": "asset reads",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        862,
+        366
+      ]
+    },
+    {
+      "id": "content-to-edge",
+      "from": "da-content",
+      "to": "edge-delivery",
+      "label": "published origin",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left",
+      "labelAt": [
+        994,
+        346
+      ]
+    },
+    {
+      "id": "live-to-coworker",
+      "from": "da-live",
+      "to": "coworker",
+      "label": "chat-ao WS",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        305,
+        366
+      ]
+    },
+    {
+      "id": "coworker-to-mcp",
+      "from": "coworker",
+      "to": "da-mcp",
+      "label": "MCP tools",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "mcpclients-to-mcp",
+      "from": "mcp-clients",
+      "to": "da-mcp",
+      "label": "HTTP + DA token",
+      "fromSide": "right",
+      "toSide": "bottom"
+    },
+    {
+      "id": "mcp-to-admin",
+      "from": "da-mcp",
+      "to": "da-admin",
+      "label": "DA tools",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "mcp-to-edge",
+      "from": "da-mcp",
+      "to": "edge-delivery",
+      "label": "preview / publish",
+      "fromSide": "bottom",
+      "toSide": "bottom",
+      "via": [
+        [
+          585,
+          540
+        ],
+        [
+          1130,
+          540
+        ]
+      ],
+      "labelAt": [
+        900,
+        528
+      ]
+    }
+  ]
+}

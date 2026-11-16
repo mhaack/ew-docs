@@ -5,66 +5,7 @@
     "title": "DA Authoring UX Workflow",
     "subtitle": "Core UI blocks in da-live & da-nx across a typical authoring session",
     "quality_profile": "showcase",
-    "views": [
-      {
-        "id": "author-a-page",
-        "label": "Author a page",
-        "focus": [
-          "browse",
-          "authoring",
-          "preview"
-        ],
-        "note": "Browse opens the Authoring canvas."
-      },
-      {
-        "id": "ai-loop",
-        "label": "AI-assisted editing loop",
-        "focus": [
-          "preview",
-          "aiassist",
-          "authoring"
-        ],
-        "note": "Preview the draft, refine it with the AI Assistant, and iterate."
-      },
-      {
-        "id": "governance-publish",
-        "label": "Governance & publish",
-        "focus": [
-          "preview",
-          "aiassist",
-          "preflight",
-          "entctx",
-          "publish"
-        ],
-        "note": "Preview or the AI Assistant can trigger Preflight, which checks Enterprise Context policies before Publish."
-      },
-      {
-        "id": "framework",
-        "label": "Framework & helpers",
-        "focus": [
-          "login",
-          "shell",
-          "config",
-          "extnx",
-          "sheet"
-        ],
-        "note": "Persistent da-nx chrome, config, and the Sheet editor sit alongside it as helper-level surfaces."
-      },
-      {
-        "id": "canvas-panels",
-        "label": "Authoring tool panels",
-        "focus": [
-          "authoring",
-          "outline",
-          "files",
-          "comments",
-          "versions",
-          "blocklib",
-          "extcanvas"
-        ],
-        "note": "Side panels available inside the Authoring canvas."
-      }
-    ]
+    "output": "ew-ux-workflow.html"
   },
   "lanes": [
     {
@@ -380,7 +321,7 @@
       "dot": "cyan",
       "title": "Authoring",
       "items": [
-        "Browse opens either the Authoring canvas or a Sheet \u2014 both da-live blocks",
+        "Browse opens either the Authoring canvas or a Sheet — both da-live blocks",
         "Sheet reuses da-title (same Preview/Publish toolbar as legacy edit)",
         "Login, App Shell, AI Assistant and Extensions are persistent da-nx framework chrome"
       ]
@@ -389,9 +330,9 @@
       "dot": "violet",
       "title": "AI + Governance",
       "items": [
-        "chat.js picks nx-chat or nx-chat-ao \u2014 chat-ao talks to CMA/CX Coworker over MCP as its backend",
+        "chat.js picks nx-chat or nx-chat-ao — chat-ao talks to CMA/CX Coworker over MCP as its backend",
         "Preflight only gates the Authoring path; Sheet publishes directly, no AI, no governance",
-        "Preview and Publish share one utility: aemAction()/saveToAem() \u2192 nx2 api.js"
+        "Preview and Publish share one utility: aemAction()/saveToAem() → nx2 api.js"
       ]
     }
   ]

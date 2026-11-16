@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Experience Workspace Platform Architecture (Helix 6)",
+    "subtitle": "Backend on Helix 6: api.aem.live + Source Bus",
+    "output": "ew-architecture3.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "authoring-path",
+        "label": "Authoring request path",
+        "focus": [
+          "author",
+          "da-live",
+          "da-nx",
+          "helix-api",
+          "source-bus"
+        ],
+        "note": "da-live, on the da-nx shell, reads/writes source documents via the Helix API Source endpoints, backed by the Source Bus."
+      },
+      {
+        "id": "realtime-collab",
+        "label": "Real-time collaboration",
+        "focus": [
+          "da-live",
+          "da-collab",
+          "helix-api",
+          "source-bus"
+        ],
+        "note": "Editors sync over da-collab's Durable Objects, which persist documents to the Source Bus via api.aem.live."
+      },
+      {
+        "id": "coworker-agent",
+        "label": "CMA / CX Coworker agent",
+        "focus": [
+          "da-live",
+          "coworker",
+          "da-mcp",
+          "helix-api"
+        ],
+        "note": "chat-ao talks to Adobe's Agent Orchestrator (Coworker), which calls back through da-mcp's tools onto the Helix API."
+      },
+      {
+        "id": "publishing",
+        "label": "Preview & publish",
+        "focus": [
+          "helix-api",
+          "source-bus",
+          "edge-delivery"
+        ],
+        "note": "api.aem.live reads source from the Source Bus, previews into the Content Bus and publishes to aem.page / aem.live."
+      }
+    ],
+    "legend": {
+      "entries": {
+        "database": {
+          "label": "Storage"
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "author",
+      "type": "external",
+      "label": "Author",
+      "sublabel": "Browser",
+      "pos": [
+        20,
+        250
+      ],
+      "size": [
+        150,
+        82
+      ]
+    },
+    {
+      "id": "da-live",
+      "type": "frontend",
+      "label": "Experience Workspace",
+      "sublabel": "Authoring UI · da-live",
+      "pos": [
+        200,
+        250
+      ],
+      "size": [
+        210,
+        82
+      ],
+      "tag": "canvas, browse, sheet"
+    },
+    {
+      "id": "da-nx",
+      "type": "frontend",
+      "label": "Shell & Tools",
+      "sublabel": "Shared shell · da-nx",
+      "pos": [
+        200,
+        80
+      ],
+      "size": [
+        210,
+        82
+      ],
+      "tag": "chat-ao, editortoggle, nav"
+    },
+    {
+      "id": "helix-api",
+      "type": "backend",
+      "label": "Edge Delivery Admin",
+      "sublabel": "Helix API · api.aem.live",
+      "pos": [
+        490,
+        250
+      ],
+      "size": [
+        210,
+        82
+      ],
+      "tag": "source, preview, publish, config"
+    },
+    {
+      "id": "da-collab",
+      "type": "backend",
+      "label": "Collaboration Services",
+      "sublabel": "Y.js sync · da-collab",
+      "pos": [
+        490,
+        80
+      ],
+      "size": [
+        210,
+        82
+      ]
+    },
+    {
+      "id": "edge-delivery",
+      "type": "external",
+      "label": "Edge Delivery",
+      "sublabel": "aem.live / aem.page",
+      "pos": [
+        1040,
+        250
+      ],
+      "size": [
+        180,
+        82
+      ]
+    },
+    {
+      "id": "coworker",
+      "type": "external",
+      "label": "CMA / CX Coworker",
+      "sublabel": "Agent Orchestrator",
+      "pos": [
+        200,
+        430
+      ],
+      "size": [
+        210,
+        82
+      ]
+    },
+    {
+      "id": "da-mcp",
+      "type": "backend",
+      "label": "AEM MCP",
+      "sublabel": "MCP server · 17 DA tools",
+      "pos": [
+        490,
+        430
+      ],
+      "size": [
+        190,
+        82
+      ]
+    },
+    {
+      "id": "mcp-clients",
+      "type": "external",
+      "label": "Other MCP Clients",
+      "sublabel": "Claude, Cursor, ChatGPT",
+      "pos": [
+        200,
+        580
+      ],
+      "size": [
+        210,
+        82
+      ]
+    },
+    {
+      "id": "source-bus",
+      "type": "database",
+      "label": "Source Bus",
+      "sublabel": "S3 · source docs + versions",
+      "pos": [
+        1030,
+        430
+      ],
+      "size": [
+        200,
+        82
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "author-to-live",
+      "from": "author",
+      "to": "da-live",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "nx-to-live",
+      "from": "da-nx",
+      "to": "da-live",
+      "label": "shell + blocks",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        298,
+        186
+      ]
+    },
+    {
+      "id": "live-to-api",
+      "from": "da-live",
+      "to": "helix-api",
+      "label": "source CRUD",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "live-to-collab",
+      "from": "da-live",
+      "to": "da-collab",
+      "label": "doc sync (WS)",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "collab-to-api",
+      "from": "da-collab",
+      "to": "helix-api",
+      "label": "persist source",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        680,
+        206
+      ]
+    },
+    {
+      "id": "api-to-sourcebus",
+      "from": "helix-api",
+      "to": "source-bus",
+      "label": "/source read/write",
+      "fromSide": "bottom",
+      "toSide": "left"
+    },
+    {
+      "id": "api-to-edge",
+      "from": "helix-api",
+      "to": "edge-delivery",
+      "label": "preview / publish",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "live-to-coworker",
+      "from": "da-live",
+      "to": "coworker",
+      "label": "chat-ao WS",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        305,
+        366
+      ]
+    },
+    {
+      "id": "coworker-to-mcp",
+      "from": "coworker",
+      "to": "da-mcp",
+      "label": "MCP tools",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "mcpclients-to-mcp",
+      "from": "mcp-clients",
+      "to": "da-mcp",
+      "label": "HTTP + DA token",
+      "fromSide": "right",
+      "toSide": "bottom"
+    },
+    {
+      "id": "mcp-to-api",
+      "from": "da-mcp",
+      "to": "helix-api",
+      "label": "Helix API",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ]
+}

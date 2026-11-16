@@ -18,51 +18,7 @@
           "label": "Integrations"
         }
       }
-    },
-    "views": [
-      {
-        "id": "entry-points",
-        "label": "Entry points",
-        "focus": [
-          "author",
-          "ema",
-          "abv",
-          "workfront",
-          "experience-workspace"
-        ],
-        "note": "Marketeers, content creators, ABV, Workfront, and EMA feed work into Experience Workspace."
-      },
-      {
-        "id": "governance",
-        "label": "Governance",
-        "focus": [
-          "brand-governance",
-          "aso",
-          "experience-workspace"
-        ],
-        "note": "Governance policies shape authoring, compliance, and optimization decisions."
-      },
-      {
-        "id": "mcp-ecosystem",
-        "label": "MCP ecosystem",
-        "focus": [
-          "experience-workspace",
-          "coworker",
-          "aem-mcp"
-        ],
-        "note": "Coworker accesses Experience Workspace through the MCP tool layer."
-      },
-      {
-        "id": "delivery-and-assets",
-        "label": "Assets and delivery",
-        "focus": [
-          "experience-workspace",
-          "aem-assets",
-          "edge-delivery"
-        ],
-        "note": "Experience Workspace coordinates with assets and delivery systems for publishing outcomes."
-      }
-    ]
+    }
   },
   "components": [
     {

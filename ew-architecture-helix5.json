@@ -2,55 +2,10 @@
   "schema_version": 1,
   "diagram_type": "architecture",
   "meta": {
-    "title": "Experience Workspace Platform Architecture",
+    "title": "Experience Workspace Platform Architecture (Helix 5)",
     "subtitle": "DA core services and runtime relationships",
-    "output": "ew-architecture2.html",
+    "output": "ew-architecture-helix5.html",
     "quality_profile": "showcase",
-    "views": [
-      {
-        "id": "authoring-path",
-        "label": "Authoring request path",
-        "focus": [
-          "author",
-          "da-live",
-          "da-nx",
-          "da-admin"
-        ],
-        "note": "The author's browser loads da-live, built on the da-nx shell, and reads/writes content through da-admin."
-      },
-      {
-        "id": "realtime-collab",
-        "label": "Real-time collaboration",
-        "focus": [
-          "da-live",
-          "da-collab",
-          "da-admin"
-        ],
-        "note": "Concurrent editors sync over da-collab's Durable Objects, which persist back through da-admin."
-      },
-      {
-        "id": "coworker-agent",
-        "label": "CMA / CX Coworker agent",
-        "focus": [
-          "da-live",
-          "coworker",
-          "da-mcp",
-          "da-admin"
-        ],
-        "note": "The chat-ao block in da-live/da-nx talks to Adobe's Agent Orchestrator (Coworker), which calls DA back through da-mcp's tool set."
-      },
-      {
-        "id": "publishing",
-        "label": "Publishing to Edge Delivery",
-        "focus": [
-          "da-admin",
-          "storage",
-          "da-content",
-          "edge-delivery"
-        ],
-        "note": "Published content is served to production sites through da-content, which falls back to da-admin."
-      }
-    ],
     "legend": {
       "entries": {
         "database": {
@@ -78,7 +33,7 @@
       "id": "da-live",
       "type": "frontend",
       "label": "Experience Workspace",
-      "sublabel": "Authoring UI \u00b7 da-live",
+      "sublabel": "Authoring UI · da-live",
       "pos": [
         200,
         250
@@ -93,7 +48,7 @@
       "id": "da-nx",
       "type": "frontend",
       "label": "Shell & Tools",
-      "sublabel": "Shared shell \u00b7 da-nx",
+      "sublabel": "Shared shell · da-nx",
       "pos": [
         200,
         80
@@ -108,7 +63,7 @@
       "id": "da-admin",
       "type": "backend",
       "label": "Backend Services",
-      "sublabel": "Worker API \u00b7 da-admin",
+      "sublabel": "Worker API · da-admin",
       "pos": [
         490,
         250
@@ -122,7 +77,7 @@
       "id": "da-collab",
       "type": "backend",
       "label": "Collaboration Services",
-      "sublabel": "Y.js sync \u00b7 da-collab",
+      "sublabel": "Y.js sync · da-collab",
       "pos": [
         490,
         80
@@ -136,7 +91,7 @@
       "id": "da-content",
       "type": "backend",
       "label": "Content Source for EDS",
-      "sublabel": "Published origin \u00b7 da-content",
+      "sublabel": "Published origin · da-content",
       "pos": [
         760,
         250
@@ -178,7 +133,7 @@
       "id": "da-mcp",
       "type": "backend",
       "label": "AEM MCP",
-      "sublabel": "MCP server \u00b7 17 DA tools",
+      "sublabel": "MCP server · 17 DA tools",
       "pos": [
         490,
         430

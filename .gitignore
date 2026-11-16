@@ -1,2 +1,7 @@
 # Archify visual-check sidecars
 *.visual-check.*
+# Archify delivery receipts
+*.delivery.json
+*.finalize.json
+*.finalize-summary.json
+*.browser-check.json

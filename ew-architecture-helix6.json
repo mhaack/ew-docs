@@ -248,7 +248,7 @@
       "id": "mcpclients-to-mcp",
       "from": "mcp-clients",
       "to": "da-mcp",
-      "label": "HTTP + DA token",
+      "label": "MCP tools",
       "fromSide": "right",
       "toSide": "bottom"
     },
